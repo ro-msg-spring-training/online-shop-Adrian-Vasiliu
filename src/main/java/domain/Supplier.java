@@ -12,8 +12,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Table(name = "supplier")
 public class Supplier extends BaseEntity {
 

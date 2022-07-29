@@ -13,8 +13,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Table(name = "order_product")
 public class OrderProduct extends BaseEntity {
 
