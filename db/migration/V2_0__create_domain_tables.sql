@@ -13,13 +13,14 @@ CREATE TABLE IF NOT EXISTS product_category
 
 CREATE TABLE IF NOT EXISTS product
 (
-    id        INT PRIMARY KEY AUTO_INCREMENT,
-    name      VARCHAR(50),
-    price     DOUBLE PRECISION,
-    weight    DOUBLE PRECISION,
-    category  INT NOT NULL references product_category (id),
-    supplier  INT NOT NULL references supplier (id),
-    image_url VARCHAR(255)
+    id          INT PRIMARY KEY AUTO_INCREMENT,
+    name        VARCHAR(50),
+    description VARCHAR(255),
+    price       DOUBLE PRECISION,
+    weight      DOUBLE PRECISION,
+    category_id INT NOT NULL references product_category (id),
+    supplier_id INT NOT NULL references supplier (id),
+    image_url   VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS location
@@ -34,10 +35,10 @@ CREATE TABLE IF NOT EXISTS location
 
 CREATE TABLE IF NOT EXISTS stock
 (
-    id       INT PRIMARY KEY AUTO_INCREMENT,
-    product  INT NOT NULL references product (id),
-    location INT NOT NULL references location (id),
-    quantity INT
+    id          INT PRIMARY KEY AUTO_INCREMENT,
+    product_id  INT NOT NULL references product (id),
+    location_id INT NOT NULL references location (id),
+    quantity    INT
 );
 
 CREATE TABLE IF NOT EXISTS customer
@@ -54,7 +55,7 @@ CREATE TABLE IF NOT EXISTS order_product
 (
     id              INT PRIMARY KEY AUTO_INCREMENT,
     shipped_from    INT NOT NULL references location (id),
-    customer        INT NOT NULL references customer (id),
+    customer_id     INT NOT NULL references customer (id),
     created_at      DATETIME,
     address_country VARCHAR(50),
     address_city    VARCHAR(50),
@@ -64,16 +65,16 @@ CREATE TABLE IF NOT EXISTS order_product
 
 CREATE TABLE IF NOT EXISTS order_detail
 (
-    id            INT PRIMARY KEY AUTO_INCREMENT,
-    order_product INT NOT NULL references order_product (id),
-    product       INT NOT NULL references product (id),
-    quantity      INT
+    id               INT PRIMARY KEY AUTO_INCREMENT,
+    order_product_id INT NOT NULL references order_product (id),
+    product_id       INT NOT NULL references product (id),
+    quantity         INT
 );
 
 CREATE TABLE IF NOT EXISTS revenue
 (
-    id       INT PRIMARY KEY AUTO_INCREMENT,
-    location INT NOT NULL references location (id),
-    date     DATE,
-    sum      INT
+    id          INT PRIMARY KEY AUTO_INCREMENT,
+    location_id INT NOT NULL references location (id),
+    date        DATE,
+    sum         INT
 );

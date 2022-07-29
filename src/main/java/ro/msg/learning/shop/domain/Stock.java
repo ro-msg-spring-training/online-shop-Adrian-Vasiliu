@@ -1,4 +1,4 @@
-package domain;
+package ro.msg.learning.shop.domain;
 
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -10,7 +10,8 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "stock")
 public class Stock extends BaseEntity {
 

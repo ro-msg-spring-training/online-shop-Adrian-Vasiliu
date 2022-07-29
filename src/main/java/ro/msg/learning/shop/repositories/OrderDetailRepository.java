@@ -1,6 +1,6 @@
-package repositories;
+package ro.msg.learning.shop.repositories;
 
-import domain.OrderDetail;
+import ro.msg.learning.shop.domain.OrderDetail;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

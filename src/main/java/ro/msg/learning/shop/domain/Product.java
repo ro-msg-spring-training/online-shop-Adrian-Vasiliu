@@ -1,4 +1,4 @@
-package domain;
+package ro.msg.learning.shop.domain;
 
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -11,7 +11,8 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "product")
 public class Product extends BaseEntity {
 
@@ -28,7 +29,7 @@ public class Product extends BaseEntity {
     private Double weight;
 
     @ManyToOne
-    @JoinColumn(name = "product_category_id")
+    @JoinColumn(name = "category_id")
     private ProductCategory productCategory;
 
     @ManyToOne

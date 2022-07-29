@@ -1,4 +1,4 @@
-package domain;
+package ro.msg.learning.shop.domain;
 
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -18,7 +18,7 @@ import java.util.Objects;
 public class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    protected Long id;
 
     @Override
     public boolean equals(Object o) {

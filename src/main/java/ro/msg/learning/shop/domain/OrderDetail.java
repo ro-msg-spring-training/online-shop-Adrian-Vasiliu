@@ -1,4 +1,4 @@
-package domain;
+package ro.msg.learning.shop.domain;
 
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -13,19 +13,24 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
-@Table(name = "order_product")
-public class OrderProduct extends BaseEntity {
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "order_detail")
+public class OrderDetail extends BaseEntity {
 
     @ManyToOne
-    @JoinColumn(name = "shipped_from_id")
-    private Location shippedFrom;
+    @JoinColumn(name = "order_product_id")
+    private OrderProduct order;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        OrderProduct that = (OrderProduct) o;
+        OrderDetail that = (OrderDetail) o;
         return getId() != null && Objects.equals(getId(), that.getId());
     }
 
