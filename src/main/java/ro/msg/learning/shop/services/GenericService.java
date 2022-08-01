@@ -12,4 +12,6 @@ public interface GenericService<Entity, Repository extends PagingAndSortingRepos
     Entity getById(Long id);
 
     void delete(Long id);
+
+    void update(Long id, Entity newEntity);
 }

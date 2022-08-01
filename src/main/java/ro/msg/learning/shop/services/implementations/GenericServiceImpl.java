@@ -35,13 +35,18 @@ public class GenericServiceImpl<Entity, Repository extends PagingAndSortingRepos
         throw new NotFoundException("Entity not found!");
     }
 
+    public void update(Long id, Entity newEntity) {
+        Optional<Entity> optionalEntity = repository.findById(id);
+        if (optionalEntity.isPresent()) {
+            repository.save(newEntity);
+        } else throw new NotFoundException("Entity not found!");
+    }
+
     public void delete(Long id) {
         Optional<Entity> optionalEntity = repository.findById(id);
         if (optionalEntity.isPresent()) {
             repository.deleteById(id);
-            return;
-        }
-        throw new NotFoundException("Entity not found!");
+        } else throw new NotFoundException("Entity not found!");
     }
 
 }

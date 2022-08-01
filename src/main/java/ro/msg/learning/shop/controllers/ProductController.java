@@ -30,6 +30,16 @@ public class ProductController {
         return productMapper.toDTOs(productService.getAll());
     }
 
+    @GetMapping(value = "/{id}")
+    public ProductDTO getProduct(@PathVariable("id") Long productId) {
+        return productMapper.toDto(productService.getById(productId));
+    }
+
+    @PutMapping(value = "/{id}")
+    public void update(@PathVariable("id") Long productId, @RequestBody ProductDTO productDTO) {
+        productService.update(productId, productMapper.toProduct(productDTO));
+    }
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long productId) {
         productService.delete(productId);
