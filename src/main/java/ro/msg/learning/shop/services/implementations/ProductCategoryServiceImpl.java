@@ -10,21 +10,21 @@ import ro.msg.learning.shop.services.ProductCategoryService;
 import java.util.Optional;
 
 @Service
-public class ProductCategoryServiceImpl implements ProductCategoryService {
-    public ProductCategoryRepository productCategoryRepository;
+public class ProductCategoryServiceImpl extends GenericServiceImpl<ProductCategory, ProductCategoryRepository>
+        implements ProductCategoryService {
 
     @Autowired
     public ProductCategoryServiceImpl(ProductCategoryRepository productCategoryRepository) {
-        this.productCategoryRepository = productCategoryRepository;
+        super(productCategoryRepository);
     }
 
+//    @Override
+//    public ProductCategory getByName(String name) {
+//        Optional<ProductCategory> productCategoryOptional = productCategoryRepository.findByName(name);
+//        if (!productCategoryOptional.isPresent()) {
+//            throw new NotFoundException("Product category not found");
+//        }
+//        return productCategoryOptional.get();
+//    }
 
-    @Override
-    public ProductCategory getByName(String name) {
-        Optional<ProductCategory> productCategoryOptional = productCategoryRepository.findByName(name);
-        if (!productCategoryOptional.isPresent()) {
-            throw new NotFoundException("Product category not found");
-        }
-        return productCategoryOptional.get();
-    }
 }

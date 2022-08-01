@@ -10,20 +10,20 @@ import ro.msg.learning.shop.services.SupplierService;
 import java.util.Optional;
 
 @Service
-public class SupplierServiceImpl implements SupplierService {
-    private final SupplierRepository supplierRepository;
+public class SupplierServiceImpl extends GenericServiceImpl<Supplier, SupplierRepository> implements SupplierService {
 
     @Autowired
     public SupplierServiceImpl(SupplierRepository supplierRepository) {
-        this.supplierRepository = supplierRepository;
+        super(supplierRepository);
     }
 
-    @Override
-    public Supplier getByName(String name) {
-        Optional<Supplier> supplierOptional = supplierRepository.findByName(name);
-        if (!supplierOptional.isPresent()) {
-            throw new NotFoundException("Supplier not found");
-        }
-        return supplierOptional.get();
-    }
+//    @Override
+//    public Supplier getByName(String name) {
+//        Optional<Supplier> supplierOptional = repository.findByName(name);
+//        if (supplierOptional.isPresent()) {
+//            return supplierOptional.get();
+//        }
+//        throw new NotFoundException("Supplier not found!");
+//    }
+
 }

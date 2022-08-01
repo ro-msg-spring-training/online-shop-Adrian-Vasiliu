@@ -6,5 +6,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import java.util.Optional;
 
 public interface SupplierRepository extends PagingAndSortingRepository<Supplier, Long> {
-    Optional<Supplier> findByName(String name);
+    // Optional<Supplier> findByName(String name);
 }

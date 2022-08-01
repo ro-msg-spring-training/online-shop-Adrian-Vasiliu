@@ -14,7 +14,6 @@ import java.util.List;
 
 @Component
 public class ProductMapper {
-
     private final ProductCategoryService productCategoryService;
     private final SupplierService supplierService;
 
@@ -24,32 +23,27 @@ public class ProductMapper {
         this.supplierService = supplierService;
     }
 
-
     public ProductDTO toDto(Product product) {
         ProductCategory productCategory = product.getProductCategory();
         Supplier supplier = product.getSupplier();
-        return new ProductDTO(product.getName(),product.getDescription(), product.getPrice(), product.getWeight(),
-                productCategory.getName(),productCategory.getDescription(), supplier.getName(), product.getImageUrl());
+        return new ProductDTO(product.getId(), product.getName(), product.getDescription(), product.getPrice(), product.getWeight(),
+                productCategory.getId(), productCategory.getName(), productCategory.getDescription(), supplier.getId(),
+                supplier.getName(), product.getImageUrl());
     }
 
-    public List<ProductDTO> toDTOs (List<Product> products) {
+    public List<ProductDTO> toDTOs(List<Product> products) {
         List<ProductDTO> productsDTO = new ArrayList<>();
-        for(Product product: products) {
+        for (Product product : products) {
             productsDTO.add(toDto(product));
         }
         return productsDTO;
     }
 
-    public Product toProduct(ProductDTO createProductDTO) {
-        ProductCategory productCategory = productCategoryService.getByName(createProductDTO.getCategoryName());
-        Supplier supplier = supplierService.getByName(createProductDTO.getSupplierName());
-        return new Product(createProductDTO.getName(), createProductDTO.getDescription(), createProductDTO.getPrice(),
-                createProductDTO.getWeight(), productCategory, supplier, createProductDTO.getImageUrl());
+    public Product toProduct(ProductDTO productDTO) {
+        ProductCategory productCategory = productCategoryService.getById(productDTO.getCategoryId());
+        Supplier supplier = supplierService.getById(productDTO.getSupplierId());
+        return new Product(productDTO.getName(), productDTO.getDescription(), productDTO.getPrice(),
+                productDTO.getWeight(), productCategory, supplier, productDTO.getImageUrl());
     }
 
-//    public Product toProduct(ProductDTO productDTO) {
-//
-//        return new Product(productDTO.getName(), productDTO.getDescription(), productDTO.getPrice(),
-//                productDTO.getWeight(),productDTO.);
-//    }
 }
