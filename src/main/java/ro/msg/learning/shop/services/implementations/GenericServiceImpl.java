@@ -39,6 +39,7 @@ public class GenericServiceImpl<Entity, Repository extends PagingAndSortingRepos
         Optional<Entity> optionalEntity = repository.findById(id);
         if (optionalEntity.isPresent()) {
             repository.deleteById(id);
+            return;
         }
         throw new NotFoundException("Entity not found!");
     }
