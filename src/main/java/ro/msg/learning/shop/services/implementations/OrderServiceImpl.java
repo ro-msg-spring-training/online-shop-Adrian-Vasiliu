@@ -3,9 +3,10 @@ package ro.msg.learning.shop.services.implementations;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ro.msg.learning.shop.domain.DTOs.OrderDTO;
-import ro.msg.learning.shop.domain.OrderDetail;
+import ro.msg.learning.shop.domain.OrderProduct;
 import ro.msg.learning.shop.services.OrderService;
 import ro.msg.learning.shop.services.findingLocatonsStrategy.FindingLocationsConfig;
+import ro.msg.learning.shop.services.findingLocatonsStrategy.ProductLocation;
 
 import java.util.List;
 
@@ -19,8 +20,10 @@ public class OrderServiceImpl implements OrderService {
 //        this.findingLocationsStrategy = findingLocationsStrategy;
 //    }
 
-    public List<OrderDetail> createOrder(OrderDTO orderDTO) {
-        return findingLocationsConfig.chooseStrategy().getOrderDetails(orderDTO);
+    public OrderProduct create(OrderDTO orderDTO) {
+        List<ProductLocation> productLocationList = findingLocationsConfig.chooseStrategy().getProductLocations(orderDTO);
+        System.out.println(productLocationList);
+        return null;
     }
 
 }

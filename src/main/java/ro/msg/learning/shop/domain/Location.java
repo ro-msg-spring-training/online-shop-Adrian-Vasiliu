@@ -29,8 +29,8 @@ public class Location extends BaseEntity {
     @Column(name="address_county")
     private String addressCounty;
 
-    @Column
-    private String street;
+    @Column(name="address_street")
+    private String addressStreet;
 
     @Override
     public boolean equals(Object o) {

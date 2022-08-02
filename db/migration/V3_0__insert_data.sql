@@ -10,7 +10,9 @@ values (100, 'Notebook Basic 15', 'Notebook Basic', 956, 2000, 1, 11,
         'https://sapui5.hana.ondemand.com/test-resources/sap/ui/documentation/sdk/images/HT-1000.jpg');
 insert into location
 values (1, 'Altex', 'Romania', 'Cluj-Napoca', 'Cluj', 'Memorandumului'),
-       (100, 'Flanco', 'Romania', 'Piatra Neamt', 'Neamt', '9 Mai');
+       (2, 'Flanco', 'Romania', 'Piatra Neamt', 'Neamt', '9 Mai');
 insert into stock
-values (10, 100, 1, 10),
-       (11, 100, 2, 3);
+values (10, 100, 1, 3),
+       (11, 100, 2, 10);
+insert into customer
+values (100, 'Andrei', 'Popescu', 'andreipop', 'gogosi', 'andrei.popescu@mail.com');

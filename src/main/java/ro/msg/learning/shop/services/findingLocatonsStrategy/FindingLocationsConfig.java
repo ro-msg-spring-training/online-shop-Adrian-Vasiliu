@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import ro.msg.learning.shop.services.CustomerService;
 import ro.msg.learning.shop.services.ProductService;
 import ro.msg.learning.shop.services.StockService;
 
@@ -17,16 +16,15 @@ public class FindingLocationsConfig {
 
     private final StockService stockService;
     private final ProductService productService;
-    private final CustomerService customerService;
 
     @Bean
     public FindingLocationsStrategy chooseStrategy() {
         switch (strategy) {
             case "singleLocation": {
-                return new SingleLocationStrategy(stockService, productService, customerService);
+                return new SingleLocationStrategy();
             }
             case "mostAbundant": {
-                return new MostAbundantStrategy();
+                return new MostAbundantStrategy(stockService, productService);
             }
             default: {
                 return null;
