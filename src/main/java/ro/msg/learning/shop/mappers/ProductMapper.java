@@ -26,9 +26,9 @@ public class ProductMapper {
     public ProductDTO toDto(Product product) {
         ProductCategory productCategory = product.getProductCategory();
         Supplier supplier = product.getSupplier();
-        return new ProductDTO(product.getId(), product.getName(), product.getDescription(), product.getPrice(), product.getWeight(),
-                productCategory.getId(), productCategory.getName(), productCategory.getDescription(), supplier.getId(),
-                supplier.getName(), product.getImageUrl());
+        return new ProductDTO(product.getId(), product.getName(), product.getDescription(), product.getPrice(),
+                product.getWeight(), productCategory.getId(), productCategory.getName(),
+                productCategory.getDescription(), supplier.getId(), supplier.getName(), product.getImageUrl());
     }
 
     public List<ProductDTO> toDTOs(List<Product> products) {

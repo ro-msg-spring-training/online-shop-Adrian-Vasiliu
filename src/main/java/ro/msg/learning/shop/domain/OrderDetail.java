@@ -3,10 +3,7 @@ package ro.msg.learning.shop.domain;
 import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -25,6 +22,9 @@ public class OrderDetail extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+    @Column
+    private Integer quantity;
 
     @Override
     public boolean equals(Object o) {
