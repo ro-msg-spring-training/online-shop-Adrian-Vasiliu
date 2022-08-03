@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ro.msg.learning.shop.domain.DTOs.ProductDTO;
 import ro.msg.learning.shop.domain.DTOs.mappers.ProductMapper;
+import ro.msg.learning.shop.domain.Product;
 import ro.msg.learning.shop.services.ProductService;
 
 import java.util.List;
@@ -21,8 +22,8 @@ public class ProductController {
     }
 
     @PostMapping(value = "")
-    public void create(@RequestBody ProductDTO productDTO) {
-        productService.create(productMapper.toProduct(productDTO));
+    public Product create(@RequestBody ProductDTO productDTO) {
+        return productService.create(productMapper.toProduct(productDTO));
     }
 
     @GetMapping(value = "")
@@ -36,8 +37,8 @@ public class ProductController {
     }
 
     @PutMapping(value = "")
-    public void update(@RequestBody ProductDTO productDTO) {
-        productService.update(productDTO.getId(), productMapper.toProduct(productDTO));
+    public Product update(@RequestBody ProductDTO productDTO) {
+        return productService.update(productDTO.getId(), productMapper.toProduct(productDTO));
     }
 
     @DeleteMapping("/{id}")

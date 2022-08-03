@@ -17,13 +17,4 @@ public class SupplierServiceImpl extends GenericServiceImpl<Supplier, SupplierRe
         super(supplierRepository);
     }
 
-//    @Override
-//    public Supplier getByName(String name) {
-//        Optional<Supplier> supplierOptional = repository.findByName(name);
-//        if (supplierOptional.isPresent()) {
-//            return supplierOptional.get();
-//        }
-//        throw new NotFoundException("Supplier not found!");
-//    }
-
 }

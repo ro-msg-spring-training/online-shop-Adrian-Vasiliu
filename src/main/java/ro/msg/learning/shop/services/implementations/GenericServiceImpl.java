@@ -12,6 +12,7 @@ public class GenericServiceImpl<Entity, Repository extends PagingAndSortingRepos
         implements GenericService<Entity, Repository> {
 
     protected Repository repository;
+    private final String notFoundMessage = "Entity not found!";
 
     public GenericServiceImpl(@Autowired Repository repository) {
 
@@ -19,8 +20,8 @@ public class GenericServiceImpl<Entity, Repository extends PagingAndSortingRepos
     }
 
     @Override
-    public void create(Entity entity) {
-        repository.save(entity);
+    public Entity create(Entity entity) {
+        return repository.save(entity);
     }
 
     public List<Entity> getAll() {
@@ -32,21 +33,21 @@ public class GenericServiceImpl<Entity, Repository extends PagingAndSortingRepos
         if (optionalEntity.isPresent()) {
             return optionalEntity.get();
         }
-        throw new NotFoundException("Entity not found!");
+        throw new NotFoundException(notFoundMessage);
     }
 
-    public void update(Long id, Entity newEntity) {
+    public Entity update(Long id, Entity newEntity) {
         Optional<Entity> optionalEntity = repository.findById(id);
         if (optionalEntity.isPresent()) {
-            repository.save(newEntity);
-        } else throw new NotFoundException("Entity not found!");
+            return repository.save(newEntity);
+        } else throw new NotFoundException(notFoundMessage);
     }
 
     public void delete(Long id) {
         Optional<Entity> optionalEntity = repository.findById(id);
         if (optionalEntity.isPresent()) {
             repository.deleteById(id);
-        } else throw new NotFoundException("Entity not found!");
+        } else throw new NotFoundException(notFoundMessage);
     }
 
 }
