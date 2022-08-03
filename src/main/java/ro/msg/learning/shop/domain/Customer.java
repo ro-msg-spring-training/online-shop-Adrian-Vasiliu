@@ -15,7 +15,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "customer")
-public class Customer extends BaseEntity{
+public class Customer extends BaseEntity {
 
     @Column(name = "first_name")
     private String firstName;

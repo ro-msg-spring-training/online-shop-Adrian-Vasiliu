@@ -1,23 +1,51 @@
 package ro.msg.learning.shop.services.findingLocatonsStrategy;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-import ro.msg.learning.shop.domain.DTOs.OrderDTO;
+import lombok.AllArgsConstructor;
+import ro.msg.learning.shop.domain.Location;
+import ro.msg.learning.shop.domain.Stock;
+import ro.msg.learning.shop.exceptions.OutOfStockException;
+import ro.msg.learning.shop.services.ProductService;
+import ro.msg.learning.shop.services.StockService;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-@Component
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class SingleLocationStrategy implements FindingLocationsStrategy {
 
-//    @Autowired
-//    public SingleLocationStrategy(StockService stockService) {
-//        this.stockService = stockService;
-//    }
+    private final StockService stockService;
+    private final ProductService productService;
 
     @Override
-    public List<ProductLocation> getProductLocations(OrderDTO orderDTO) {
-        return null;
+    public List<ProductLocation> getProductLocations(Map<Long, Integer> orderedProducts) {
+        Location location = null;
+        for (Long key : orderedProducts.keySet()) {
+            boolean stockOk = false;
+            for (Stock stock : stockService.getAll()) {
+                if (stock.getProduct().equals(productService.getById(key)) &&
+                        stock.getQuantity() >= orderedProducts.get(key)) {
+                    if (location == null) {
+                        location = stock.getLocation();
+                        stockOk = true;
+                        break;
+                    }
+                    if (stock.getLocation().equals(location)) {
+                        location = stock.getLocation();
+                        stockOk = true;
+                        break;
+                    }
+                }
+            }
+            if (!stockOk) {
+                throw new OutOfStockException("Out of stock!");
+            }
+        }
+        List<ProductLocation> productLocationList = new ArrayList<>();
+        for (Long key : orderedProducts.keySet()) {
+            productLocationList.add(new ProductLocation(location, productService.getById(key), orderedProducts.get(key)));
+        }
+        return productLocationList;
     }
 
 }

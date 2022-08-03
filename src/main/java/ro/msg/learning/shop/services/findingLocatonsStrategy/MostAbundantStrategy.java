@@ -1,8 +1,6 @@
 package ro.msg.learning.shop.services.findingLocatonsStrategy;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-import ro.msg.learning.shop.domain.DTOs.OrderDTO;
+import lombok.AllArgsConstructor;
 import ro.msg.learning.shop.domain.Location;
 import ro.msg.learning.shop.domain.Product;
 import ro.msg.learning.shop.domain.Stock;
@@ -14,28 +12,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Component
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class MostAbundantStrategy implements FindingLocationsStrategy {
     private final StockService stockService;
     private final ProductService productService;
 
-//    @Autowired
-//    public MostAbundantStrategy(StockService stockService) {
-//        this.stockService = stockService;
-//    }
-
     @Override
-    public List<ProductLocation> getProductLocations(OrderDTO orderDTO) {
+    public List<ProductLocation> getProductLocations(Map<Long, Integer> orderedProducts) {
         List<ProductLocation> productLocationList = new ArrayList<>();
-        Map<Long, Integer> orderedProducts = orderDTO.getOrderedProducts();
         for (Long key : orderedProducts.keySet()) {
             Integer biggestStock = 0;
             Location location = null;
             Product product = productService.getById(key);
             for (Stock stock : stockService.getAll()) {
-                Integer quantity = stock.getQuantity();
-                if (stock.getProduct().equals(product) && quantity >= orderedProducts.get(key) && quantity > biggestStock) {
+                if (stock.getProduct().equals(product) && stock.getQuantity() >= orderedProducts.get(key) &&
+                        stock.getQuantity() > biggestStock) {
                     biggestStock = stock.getQuantity();
                     location = stock.getLocation();
                 }

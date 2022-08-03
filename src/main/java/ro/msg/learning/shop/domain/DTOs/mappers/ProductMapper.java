@@ -1,11 +1,11 @@
-package ro.msg.learning.shop.mappers;
+package ro.msg.learning.shop.domain.DTOs.mappers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ro.msg.learning.shop.domain.DTOs.ProductDTO;
 import ro.msg.learning.shop.domain.Product;
 import ro.msg.learning.shop.domain.ProductCategory;
 import ro.msg.learning.shop.domain.Supplier;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import ro.msg.learning.shop.services.ProductCategoryService;
 import ro.msg.learning.shop.services.SupplierService;
 
@@ -42,8 +42,10 @@ public class ProductMapper {
     public Product toProduct(ProductDTO productDTO) {
         ProductCategory productCategory = productCategoryService.getById(productDTO.getCategoryId());
         Supplier supplier = supplierService.getById(productDTO.getSupplierId());
-        return new Product(productDTO.getName(), productDTO.getDescription(), productDTO.getPrice(),
+        Product product = new Product(productDTO.getName(), productDTO.getDescription(), productDTO.getPrice(),
                 productDTO.getWeight(), productCategory, supplier, productDTO.getImageUrl());
+        product.setId(productDTO.getId());
+        return product;
     }
 
 }

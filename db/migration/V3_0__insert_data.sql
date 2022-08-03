@@ -13,6 +13,8 @@ values (1, 'Altex', 'Romania', 'Cluj-Napoca', 'Cluj', 'Memorandumului'),
        (2, 'Flanco', 'Romania', 'Piatra Neamt', 'Neamt', '9 Mai');
 insert into stock
 values (10, 100, 1, 3),
-       (11, 100, 2, 10);
+       (11, 100, 2, 10),
+       (12, 101, 2, 4),
+       (13, 101, 1, 9);
 insert into customer
 values (100, 'Andrei', 'Popescu', 'andreipop', 'gogosi', 'andrei.popescu@mail.com');

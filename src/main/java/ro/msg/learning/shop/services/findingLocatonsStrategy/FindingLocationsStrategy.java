@@ -1,9 +1,8 @@
 package ro.msg.learning.shop.services.findingLocatonsStrategy;
 
-import ro.msg.learning.shop.domain.DTOs.OrderDTO;
-
 import java.util.List;
+import java.util.Map;
 
 public interface FindingLocationsStrategy {
-    List<ProductLocation> getProductLocations(OrderDTO orderDTO);
+    List<ProductLocation> getProductLocations(Map<Long, Integer> orderedProducts);
 }

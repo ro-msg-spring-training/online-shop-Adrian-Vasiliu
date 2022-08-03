@@ -3,7 +3,7 @@ package ro.msg.learning.shop.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ro.msg.learning.shop.domain.DTOs.ProductDTO;
-import ro.msg.learning.shop.mappers.ProductMapper;
+import ro.msg.learning.shop.domain.DTOs.mappers.ProductMapper;
 import ro.msg.learning.shop.services.ProductService;
 
 import java.util.List;
@@ -35,9 +35,9 @@ public class ProductController {
         return productMapper.toDto(productService.getById(productId));
     }
 
-    @PutMapping(value = "/{id}")
-    public void update(@PathVariable("id") Long productId, @RequestBody ProductDTO productDTO) {
-        productService.update(productId, productMapper.toProduct(productDTO));
+    @PutMapping(value = "")
+    public void update(@RequestBody ProductDTO productDTO) {
+        productService.update(productDTO.getId(), productMapper.toProduct(productDTO));
     }
 
     @DeleteMapping("/{id}")
