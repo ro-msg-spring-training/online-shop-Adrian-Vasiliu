@@ -5,7 +5,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ro.msg.learning.shop.domain.DTO.OrderDTO;
+import ro.msg.learning.shop.domain.DTO.CreateOrderDTO;
+import ro.msg.learning.shop.domain.DTO.OrderResponseDTO;
 import ro.msg.learning.shop.domain.DTO.mapper.OrderMapper;
 import ro.msg.learning.shop.domain.OrderProduct;
 import ro.msg.learning.shop.service.OrderService;
@@ -23,8 +24,9 @@ public class OrderController {
     }
 
     @PostMapping(value = "")
-    public OrderProduct create(@RequestBody OrderDTO orderDTO) {
-        return orderService.create(orderMapper.toOrder(orderDTO), orderDTO.getOrderedProducts());
+    public OrderResponseDTO create(@RequestBody CreateOrderDTO createOrderDTO) {
+        OrderProduct orderProduct = orderService.create(orderMapper.toOrder(createOrderDTO), createOrderDTO.getOrderedProducts());
+        return orderMapper.toDTO(orderProduct);
     }
 
 }

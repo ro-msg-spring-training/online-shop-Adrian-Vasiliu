@@ -4,9 +4,7 @@ import lombok.*;
 import ro.msg.learning.shop.domain.Location;
 import ro.msg.learning.shop.domain.Product;
 
-@Getter
-@Setter
-@ToString
+@Data
 @AllArgsConstructor
 public class ProductLocation {
     private Location location;

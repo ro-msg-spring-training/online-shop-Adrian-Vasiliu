@@ -24,7 +24,7 @@ public class ProductController {
     @PostMapping(value = "")
     public ProductDTO create(@RequestBody ProductDTO productDTO) {
         Product product = productService.create(productMapper.toProduct(productDTO));
-        return productMapper.toDto(product);
+        return productMapper.toDTO(product);
     }
 
     @GetMapping(value = "")
@@ -34,13 +34,13 @@ public class ProductController {
 
     @GetMapping(value = "/{id}")
     public ProductDTO getProduct(@PathVariable("id") Long productId) {
-        return productMapper.toDto(productService.getById(productId));
+        return productMapper.toDTO(productService.getById(productId));
     }
 
     @PutMapping(value = "")
     public ProductDTO update(@RequestBody ProductDTO productDTO) {
         Product product = productService.update(productDTO.getId(), productMapper.toProduct(productDTO));
-        return productMapper.toDto(product);
+        return productMapper.toDTO(product);
     }
 
     @DeleteMapping("/{id}")

@@ -23,7 +23,7 @@ public class ProductMapper {
         this.supplierService = supplierService;
     }
 
-    public ProductDTO toDto(Product product) {
+    public ProductDTO toDTO(Product product) {
         ProductCategory productCategory = product.getProductCategory();
         Supplier supplier = product.getSupplier();
         return new ProductDTO(product.getId(), product.getName(), product.getDescription(), product.getPrice(),
@@ -34,7 +34,7 @@ public class ProductMapper {
     public List<ProductDTO> toDTOs(List<Product> products) {
         List<ProductDTO> productsDTO = new ArrayList<>();
         for (Product product : products) {
-            productsDTO.add(toDto(product));
+            productsDTO.add(toDTO(product));
         }
         return productsDTO;
     }
